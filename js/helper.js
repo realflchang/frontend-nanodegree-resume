@@ -113,6 +113,12 @@ function initializeMap() {
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
+  // Create an ElevationService
+  elevator = new google.maps.ElevationService();
+
+  // Add a listener for the click event and call getElevation on that location
+  google.maps.event.addListener(map, 'click', getElevationFromListener);
+
 
   /*
   locationFinder() returns an array of every location string from the JSONs
@@ -165,13 +171,16 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: "<b>"+name+"</b><br>(Lat: "+lat+", Long: "+lon+")"
+      content: "<b>"+name+"</b><br>(Lat: "+lat+", Long: "+lon+")<div id='elevation"+numbersonly(lat)+numbersonly(lon)+"''></div>"
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
       infoWindow.open(map,marker);
+      var myLoc = [];
+      myLoc[0] = new google.maps.LatLng(lat, lon);
+      getElevation(myLoc);
     });
 
     // this is where the pin actually gets added to the map.

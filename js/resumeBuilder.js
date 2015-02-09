@@ -94,7 +94,6 @@ var work = {
 					]
 				};
 
-
 var projects = {
 			"projects": [
 							{
@@ -230,6 +229,58 @@ function inName() {
 	nameArray[nameArray.length-1] = nameArray[nameArray.length-1].toUpperCase();
 	return nameArray.join(" ");
 }
+
+  function getElevationFromListener(event) {
+    var locations = [];
+
+    // Retrieve the clicked location and push it on the array
+    var clickedLocation = event.latLng;
+    locations.push(clickedLocation);
+    getElevation(locations);
+  }
+
+    function getElevation(locations) {
+
+//    var locations = [];
+
+    // Retrieve the clicked location and push it on the array
+//    var clickedLocation = event.latLng;
+//    locations.push(clickedLocation);
+
+    // Create a LocationElevationRequest object using the array's one value
+    var positionalRequest = {
+      'locations': locations
+    }
+
+    // Initiate the location request
+    elevator.getElevationForLocations(positionalRequest, function(results, status) {
+      if (status == google.maps.ElevationStatus.OK) {
+
+        // Retrieve the first result
+        if (results[0]) {
+
+          // Open an info window indicating the elevation at the clicked position
+          // infowindow.setContent("The elevation at this point is " + results[0].elevation + " meters.");
+          // infowindow.setPosition(clickedLocation);
+          // infowindow.open(map);
+          console.log("The elevation at this point is " + results[0].elevation + " meters.");
+          var currelevation = "The elevation at this point is " + results[0].elevation + " meters.";
+          $("div#elevation"+numbersonly(locations[0].lat())+numbersonly(locations[0].lng())).text(currelevation);
+          } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Elevation service failed due to: " + status);
+      }
+    });
+  }
+
+function numbersonly(str) {
+  str = str + "";
+  str = str.replace(/[\-\.]/g,'');
+  return str;
+}
+
 
 
 bio.display();
