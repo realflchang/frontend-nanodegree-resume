@@ -200,12 +200,13 @@ projects.display = function() {
 
 		if(projects.projects[project].images.length > 0) {
 			for (image in projects.projects[project].images) {
-				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+				var formattedImage = '<a href="http://www.herbaldietshop.com" target="hds">'+HTMLprojectImage.replace('%data%', projects.projects[project].images[image]) + '</a>';
 				$(".project-entry:last").append(formattedImage);
 			}
 
 		}
 		$("#projects").find("img").css("width","300px");
+		$("#projects").find("img").parent("a").css("display","inline");
 	}
 
 }
