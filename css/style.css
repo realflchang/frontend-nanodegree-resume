@@ -13,9 +13,13 @@
   padding-right: 5%;
 }
 
+.work-entry:nth-child(even) {
+  background:white;
+}
+
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  color: black;
   line-height: 48px;
   display: inline;
 }
@@ -31,7 +35,7 @@ h2 {
 h3 {
   font-style: italic;
   font-size: 20px;
-  color: #000000;
+  color: darkgray;
   line-height: 22px;
 }
 
@@ -54,7 +58,7 @@ h2, h3, h4, h5 {
   font-size: 14px;
   color: #999999;
   line-height: 16px;
-  float: left;
+  margin-bottom: 5px;
 }
 
 .location-text {
@@ -82,26 +86,31 @@ a {
 .welcome-message {
   font-style: italic;
   font-size: 18px;
-  color: #F3F3F3;
+  color: black;
   line-height: 28px;
+  background: skyblue;
+  opacity: 0.7;
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: black;
   display: none;
 }
 
 .orange {
-  background-color: #F5AE23;
+  background-color: oldlace;
 }
 
 .orange-text {
-  color: #F5AE23;
+  color: black;
+  background: orange;
 }
 
 .white-text {
   font-weight: bold;
   color: #FFFFFF;
+  background: #606060;
+  opacity: 0.7;
 }
 
 .gray {
@@ -116,7 +125,9 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: darkslategray;
+  background: no-repeat center url(../images/ID-100170487.jpg);
+  background-size: cover;
 }
 
 .flex-box {
@@ -126,6 +137,7 @@ a {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
+  line-height: 2;
 }
 
 .center-content {
@@ -144,6 +156,7 @@ ul {
   padding: 10px;
   width: 200px;
   display: none;
+  border-radius: 50%;
 }
 
 img {
@@ -205,6 +218,7 @@ span {
   height: 400px;
   width: 100%;
   padding-bottom: 5%;
+  position:relative;
 }
 
 @media only screen and (min-width: 750px) {
@@ -212,4 +226,33 @@ span {
   .biopic {
     display: block;
   }
+}
+
+#panel {
+  position: absolute;
+  top: 50px;
+  left:20%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  margin-bottom: 20px;
+}
+
+#panel select {
+  margin-right:10px;
+  font-size:xx-small;
+  width:50%;
+}
+
+#directions-panel {
+  position:relative;
+  margin-top:20px;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 5px;
+  clear:both;
 }

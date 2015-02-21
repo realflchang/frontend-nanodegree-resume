@@ -47,13 +47,13 @@ var HTMLschoolName = '<a href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolMajor = ' <em>Major: %data%</em><br>';
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
+var HTMLonlineClasses = '<br><h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
-var HTMLonlineSchool = ' - %data%</a>';
+var HTMLonlineSchool = ' - %data%';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
+var HTMLonlineURL = ' - %data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
@@ -63,7 +63,7 @@ var googleMap = '<div id="map"></div>';
 The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
 */
 $(document).ready(function() {
-  $('button').click(function() {
+  $('button:last').click(function() {
     var iName = inName() || function(){};
     $('#name').html(iName);
   });
@@ -98,6 +98,11 @@ https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
 
+var elevator;
+var directionsDisplay;
+var directionsService;
+
+
 /*
 Start here! initializeMap() is called when page is loaded.
 */
@@ -118,6 +123,11 @@ function initializeMap() {
 
   // Add a listener for the click event and call getElevation on that location
   google.maps.event.addListener(map, 'click', getElevationFromListener);
+
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
 
   /*
@@ -141,7 +151,9 @@ function initializeMap() {
     // iterates through work locations and appends each location to
     // the locations array
     for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
+      var company = work.jobs[job].employer;
+          company = company.replace(/[ ,?](.*)/g, "");
+      locations.push(company + "..., " + work.jobs[job].address);
     }
 
     return locations;
@@ -227,6 +239,7 @@ function initializeMap() {
     }
   }
 
+
   // Sets the boundaries of the map based on pin locations
   window.mapBounds = new google.maps.LatLngBounds();
 
@@ -237,6 +250,8 @@ function initializeMap() {
   // the locations array
   pinPoster(locations);
 
+  // Add Locations to Directions Menu
+  addLocationsForDirections(locations);
 
 }
 

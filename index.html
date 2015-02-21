@@ -74,6 +74,17 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     </div>
     <div id="mapDiv">
       <h2>Where I've Lived and Worked</h2>
+      <div id="panel">
+        <b>Start: </b> <select id="start"></select><br>
+        <b>End: </b> <select id="end"></select><br>
+        <b>Mode: </b> <select id="travelmode">
+          <option value="DRIVING">Driving</option>
+          <option value="WALKING">Walking</option>
+          <option value="BICYCLING">Bicycling</option>
+          <option value="TRANSIT">Transit</option>
+        </select>
+        <button onclick="calcRoute();">Go!</button>
+      </div>
     </div>
     <div id="letsConnect" class='dark-gray'>
       <h2 class='orange center-text'>Let's Connect</h2>
